@@ -3,5 +3,13 @@
     "colors": "^1.4.0",
     "fs": "^0.0.1-security",
     "inquirer": "^8.2.4"
-  }
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }  
 }
