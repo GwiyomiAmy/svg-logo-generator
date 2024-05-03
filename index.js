@@ -1,7 +1,12 @@
-const inquirer = require('inquirer');
+const inquirer = require("inquirer");
 const colors = require('colors');
+const fs = require("fs");
+const Circle = require('./lib/shapes');
+const Square = require('./lib/shapes');
+const Triangle = require('./lib/shapes');
 
-inquirer.prompt([
+const askQuestions = inquirer.prompt(
+[
    {
       type: "input",
       message: "Enter text for the logo.(Must not be more than 3 characters)",
@@ -20,17 +25,27 @@ inquirer.prompt([
    },
    {
       type: "input",
-      message: "color",
-      name: "Enter a shape color.",
-      }
-   
-   
-   ]).then(response => {
-   if (response.shape === "circle"){
-      const shape = new Circle(response.color)
-   } if (response.shape === "square") {
-      const shape = new Square(response.color)
-   } if (response.shape === "triangle") {
-      const shape = new Triangle(response.color)
+      message: "Enter a shape color.",
+      name: "color",
    }
+   ]).then(response => {
+      if (response.shape === "circle"){
+         let shape = new Circle(response.text, response.textcolor, response.color);
+         fs.writeFile("logo.svg", shape, function(err){
+            if (err) return console.log("Error")
+            console.log("Generated logo.svg")
+         })
+      } else if (response.shape === "square") {
+         let shape = new Square(response.text, response.textcolor, response.color);
+         fs.writeFile("logo.svg", shape, function(err){
+            if (err) return console.log("Error")
+            console.log("Generated logo.svg")
+         })
+      } else if (response.shape === "triangle") {
+         let shape = new Triangle(response.text, response.textcolor, response.color)
+         fs.writeFile("logo.svg", shape, function(err){
+            if (err) return console.log("Error")
+            console.log("Generated logo.svg")
+         })
+      }
    })
